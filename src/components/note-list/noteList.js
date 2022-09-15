@@ -1,10 +1,10 @@
 import React from 'react';
+import NoteItem from '../note-item/note-item';
 
 const NoteList = ({ title, status }) => {
   return (
     <tr>
-      <td>{title}</td>
-      <td>{status}</td>
+      <NoteItem title={title} status={status} />
     </tr>
   );
 };
