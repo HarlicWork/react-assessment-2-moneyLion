@@ -20,8 +20,8 @@ function NotesApp() {
     {
       id: Math.floor(Math.random() * 1000),
       title: 'List 2',
-      status: 'Pending',
-      category: 'Pending',
+      status: 'Active',
+      category: 'Active',
     },
     {
       id: Math.floor(Math.random() * 1000),
@@ -44,12 +44,12 @@ function NotesApp() {
     // prevent empty string added
     if (newNote.title === '' || newNote.status === '') return;
 
-    if (newNote.status === 'Pending') {
+    if (newNote.status === 'Active') {
       const newNotePending = {
         id: Math.floor(Math.random() * 1000),
         title,
         status,
-        category: 'Pending',
+        category: 'Active',
       };
 
       setAddNote([...addNote].concat(newNotePending));

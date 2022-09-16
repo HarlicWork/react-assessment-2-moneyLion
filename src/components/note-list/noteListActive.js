@@ -1,10 +1,10 @@
 import React from 'react';
 const NoteListActive = ({ title, status }) => {
-  if (status === 'Pending') {
+  if (status === 'Active') {
     return (
       <tr>
         <td>{title}</td>
-        <td>Pending</td>
+        <td>Active</td>
       </tr>
     );
   } else {
