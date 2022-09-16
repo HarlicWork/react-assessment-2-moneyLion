@@ -6,20 +6,76 @@ import './index.css';
 function NotesApp() {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
-  const [addNote, setAddNote] = useState([]);
+  const [addNote, setAddNote] = useState([
+    {
+      id: Math.floor(Math.random() * 1000),
+      title: 'List 1',
+      status: 'Completed',
+      category: 'Completed',
+    },
+    {
+      id: Math.floor(Math.random() * 1000),
+      title: 'List 2',
+      status: 'Pending',
+      category: 'Pending',
+    },
+    {
+      id: Math.floor(Math.random() * 1000),
+      title: 'List 3',
+      status: 'All',
+      category: 'All',
+    },
+  ]);
+
+  const newNote = {
+    id: Math.floor(Math.random() * 1000),
+    title,
+    status,
+    category: 'All',
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const newNote = {
-      id: Math.floor(Math.random() * 1000),
-      title,
-      status,
-    };
+    if (newNote.status === 'Pending') {
+      const newNote = {
+        id: Math.floor(Math.random() * 1000),
+        title,
+        status,
+        category: 'Pending',
+      };
 
-    setAddNote([...addNote].concat(newNote));
+      setAddNote([...addNote].concat(newNote));
+    } else if (newNote.status === 'Completed') {
+      const newNote = {
+        id: Math.floor(Math.random() * 1000),
+        title,
+        status,
+        category: 'Completed',
+      };
+
+      setAddNote([...addNote].concat(newNote));
+    } else {
+      setAddNote([...addNote].concat(newNote));
+    }
+
     setTitle('');
     setStatus('');
+  };
+
+
+  // TODO
+  const getNoteList = (noteData) => {
+    let noteList = noteData;
+    if (newNote.category === 'Pending') {
+      // show pending list
+    } else if (newNote.category === 'Completed') {
+      // show completed list
+    } else {
+      // return noteList.map((note) => {
+      //   <NoteList key={note.id} title={note.title} status={note.status} />;
+      // });
+    }
   };
 
   return (
