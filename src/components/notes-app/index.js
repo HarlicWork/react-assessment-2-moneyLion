@@ -37,6 +37,9 @@ function NotesApp() {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    // prevent empty string added
+    if (newNote.title == '' || newNote.status == '') return;
+
     if (newNote.status === 'Pending') {
       const newNote = {
         id: Math.floor(Math.random() * 1000),
@@ -62,7 +65,6 @@ function NotesApp() {
     setTitle('');
     setStatus('');
   };
-
 
   // TODO
   const getNoteList = (noteData) => {
