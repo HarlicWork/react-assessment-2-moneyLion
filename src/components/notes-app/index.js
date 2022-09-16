@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import NoteList from '../note-list/noteList';
+import NoteListActive from '../note-list/noteListActive';
+import NoteListCompleted from '../note-list/noteListCompleted';
+
 import './index.css';
 
 function NotesApp() {
@@ -38,46 +42,32 @@ function NotesApp() {
     e.preventDefault();
 
     // prevent empty string added
-    if (newNote.title == '' || newNote.status == '') return;
+    if (newNote.title === '' || newNote.status === '') return;
 
     if (newNote.status === 'Pending') {
-      const newNote = {
+      const newNotePending = {
         id: Math.floor(Math.random() * 1000),
         title,
         status,
         category: 'Pending',
       };
 
-      setAddNote([...addNote].concat(newNote));
+      setAddNote([...addNote].concat(newNotePending));
     } else if (newNote.status === 'Completed') {
-      const newNote = {
+      const newNoteCompleted = {
         id: Math.floor(Math.random() * 1000),
         title,
         status,
         category: 'Completed',
       };
 
-      setAddNote([...addNote].concat(newNote));
+      setAddNote([...addNote].concat(newNoteCompleted));
     } else {
       setAddNote([...addNote].concat(newNote));
     }
 
     setTitle('');
     setStatus('');
-  };
-
-  // TODO
-  const getNoteList = (noteData) => {
-    let noteList = noteData;
-    if (newNote.category === 'Pending') {
-      // show pending list
-    } else if (newNote.category === 'Completed') {
-      // show completed list
-    } else {
-      // return noteList.map((note) => {
-      //   <NoteList key={note.id} title={note.title} status={note.status} />;
-      // });
-    }
   };
 
   return (
@@ -111,16 +101,16 @@ function NotesApp() {
       <div className='mt-50'>
         <ul className='tabs'>
           <li className='tab-item slide-up-fade-in' data-testid='allButton'>
-            All
+            <Link to='/'>All</Link>
           </li>
           <li className='tab-item slide-up-fade-in' data-testid='activeButton'>
-            Active
+            <Link to='/active'>Active</Link>
           </li>
           <li
             className='tab-item slide-up-fade-in'
             data-testid='completedButton'
           >
-            Completed
+            <Link to='/completed'>Completed</Link>
           </li>
         </ul>
       </div>
@@ -133,9 +123,35 @@ function NotesApp() {
             </tr>
           </thead>
           <tbody data-testid='noteList'>
-            {addNote.map((note) => (
-              <NoteList key={note.id} title={note.title} status={note.status} />
-            ))}
+            <Switch>
+              <Route path='/' exact>
+                {addNote.map((note) => (
+                  <NoteList
+                    key={note.id}
+                    title={note.title}
+                    status={note.status}
+                  />
+                ))}
+              </Route>
+              <Route path='/active'>
+                {addNote.map((note) => (
+                  <NoteListActive
+                    key={note.id}
+                    title={note.title}
+                    status={note.status}
+                  />
+                ))}
+              </Route>
+              <Route path='/completed'>
+                {addNote.map((note) => (
+                  <NoteListCompleted
+                    key={note.id}
+                    title={note.title}
+                    status={note.status}
+                  />
+                ))}
+              </Route>
+            </Switch>
           </tbody>
         </table>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import 'h8k-components';
 import NotesApp from './components/notes-app/index.js';
@@ -9,7 +10,9 @@ function App() {
   return (
     <div>
       <h8k-navbar header={title} />
-      <NotesApp />
+      <BrowserRouter>
+        <NotesApp />
+      </BrowserRouter>
     </div>
   );
 }
